@@ -1,0 +1,27 @@
+{
+  "pluginName": "Screely",
+  "description": "图片加阴影工具",
+  "main": "public/index.html",
+  "version": "0.0.1",
+  "author": "陈十二",
+  "preload": "preload.js",
+  "features": [
+    {
+      "code": "default",
+      "explain": "为图片添加阴影",
+      "cmds": [
+        "图片", "阴影", "加壳", "screely",
+        {
+          "type": "img",
+          "label": "Screely 给图片添加阴影"
+        },
+        {
+          "type": "files",
+          "label": "Screely 给图片添加阴影",
+          "fileType": "file",
+          "match": "/\\.(?:png|jpg|jpeg)$/i"
+        }
+      ]
+    }
+  ]
+}
