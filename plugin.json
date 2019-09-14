@@ -1,7 +1,7 @@
 {
   "pluginName": "Screely",
   "description": "图片加阴影工具",
-  "main": "public/index.html",
+  "main": "dist/index.html",
   "version": "0.0.1",
   "author": "陈十二",
   "preload": "preload.js",
