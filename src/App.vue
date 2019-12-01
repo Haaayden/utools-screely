@@ -1,28 +1,94 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="page wh100">
+    <!-- <div class="header">
+      Screely
+    </div> -->
+    <div class="content wh100">
+      <editor :source-img="sourceImg" />
+      <config-panel />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Home from './pages/home/Home'
+import Editor from './components/Editor'
+import ConfigPanel from './components/ConfigPanel'
 
+const testImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABVgAAAN+CAYAAADg32DAAAAgAElEQVR4nOzdx3Mc977393d3T8AE5MEAg8icJFGRYqbCSbdu3YVdrnqqvHrKK3vrP8ELe2Pv7MXjhespL7x5tk/de8/ROZIoUVmiKErMJOIg5zS5gxc9PRiAAAhAPJe60ud16ojADKan+9vdv/DtX/8aREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREROTvzXjRKyDPn+d5F4H/CLwHHAFCL3aNRERERERERER+s2xgCPgY+H8Nw/jyBa+PPGdKsP7KeJ73n4D/8UWvh4iIiIiIiIiIbOv/Ngzjf3rRKyHPjxKsvyKe5/0Z+NOLXg8REREREREREdnVXwzD+IcXvRLyfJgvegXk+aiOXFVyVURERERERETkl+9P1VyO/ApoBOuvQHXO1S9e9HqIiIiIiIiIiMi+XNKcrP/+aQTrr8N/fNErICIiIiIiIiIi+6aczq+AEqy/Du+96BUQEREREREREZF9U07nV0BTBPwKeJ5XAUIvej1ERERERERERGRfbMMwwi96JeTnUYL1V8DzPO9Fr4OIiIiIiIiIiOyfYRjKz/07pykCRERERERERERERA5ICVYRERERERERERGRA1KCVUREREREREREROSAlGAVEREREREREREROSAlWEVEREREREREREQOSAlWERERERERERERkQNSglVERERERERERETkgJRgFRERERERERERETkgJVhFREREREREREREDkgJVhEREREREREREZEDUoJVRERERERERERE5ICUYBURERERERERERE5ICVYRURERERERERERA5ICVYRERERERERERGRA1KCVUREREREREREROSAlGAVEREREREREREROSAlWEVEREREREREREQOSAlWERERERERERERkQNSglVERERERERERETkgJRgFRERERERERERETkgJVhFREREREREREREDkgJVhEREREREREREZEDUoJVRERERERERERE5ICUYBURERERERERERE5ICVYRURERERERERERA5ICVYRERERERERERGRA1KCVUREREREREREROSAlGAVEREREREREREROSAlWEVEREREREREREQOSAlWERERERERERERkQNSglVERERERERERETkgJRgFRERERERERERETkgJVhFREREREREREREDkgJVhEREREREREREZEDUoJVRERERERERERE5ICUYBURERERERERERE5ICVYRURERERERERERA5ICVYRERERERERERGRA1KCVUREREREREREROSAlGAVEREREREREREROSAlWEVEREREREREREQOSAlWERERERERERERkQNSglVERERERERERETkgJRgFRERERERERERETkgJVhFREREREREREREDkgJVhEREREREREREZEDUoJVRERERERERERE5ICUYBURERERERERERE5ICVYRURERERERERERA5ICVYRERERERERERGRA1KCVUREREREREREROSAlGAVEREREREREREROSAlWEVEREREREREREQOSAlWERERERERERERkQNSglVERERERERERETkgJRgFRERERERERERETkgJVhFREREREREREREDkgJVhEREREREREREZEDUoJVRERERERERERE5ICUYBURERERERERERE5ICVYRURERERERERERA5ICVYRERERERERERGRA1KCVUREREREREREROSAlGAVEREREREREfmN8TzvRa+CyK+GEqwiIiIiIiIiIr8xhmG86FUQ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'
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
+  components: { Home, Editor, ConfigPanel },
+  data() {
+    return {
+      // sourceImg: window.utools ? '' : 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1944289371,4040188413&fm=26&gp=0.jpg'
+      sourceImg: window.utools ? '' : testImg
+    }
+  },
+  created() {
+    utools.onPluginEnter(({ code, payload, type }) => {
+      console.log('=== plugin enter ===', code, payload, type)
+      // 图片加阴影
+      if (code === 'default') {
+        // 上传的是图片文件  文件路径
+        if (type === 'files') {
+          const img = payload[0].path
+          this.sourceImg = img
+        } else if (type === 'img') {
+          // 粘贴板图片   base64
+          const imgBase64 = payload
+          this.sourceImg = imgBase64
+        }
+      }
+    })
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.wh100 {
+  width: 100%;
+  height: 100%;
+}
+.flex {
+  display: flex;
+}
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+.flex-ali-center {
+  align-items: center;
+}
+.flex-jus-center {
+  justify-content: center;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  /* background-color: #4A90E2; */
+  background: linear-gradient(90deg, rgb(5, 117, 230) 0%, rgb(20, 53, 179) 100%);
+  height: 54px;
+  line-height: 54px;
+  font-weight: 400;
+  font-size: 24px;
+  padding-left: 50px;
+  /* padding: 37px 0; */
+  color: #fff;
+}
+.content {
+  display: flex;
+  flex: 1;
 }
 </style>
