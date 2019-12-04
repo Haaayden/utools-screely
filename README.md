@@ -12,6 +12,7 @@ Feature:
 
 问题反馈:
 
+[issue](https://github.com/Haaayden/utools-better-img/issues)
 
 Todo:
 1. [ ] 自定义背景色
