@@ -1,10 +1,11 @@
 {
   "pluginName": "Better Img",
   "description": "给图片添加阴影",
-  "main": "dist/index.html",
+  "main": "index.html",
   "version": "1.0.0",
   "author": "陈十二",
   "preload": "preload.js",
+  "logo": "app-logo.png",
   "features": [
     {
       "code": "default",

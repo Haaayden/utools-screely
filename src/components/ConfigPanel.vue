@@ -65,6 +65,7 @@ export default {
   methods: {
     onClickCopy() {
       this.$bus.$emit('copy')
+      window.utools.outPlugin()
     },
     handler() {
       if (this.execHandler) {
@@ -89,6 +90,9 @@ h3 {
   font-size: 16px;
   margin: 6px 0;
   font-weight: 200;
+}
+button {
+  outline: none;
 }
 .config-panel__container {
   background-color: #2F3542;
